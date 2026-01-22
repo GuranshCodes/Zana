@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+
+    .btn:hover {
+      box-shadow: 0 10px 30px rgba(99,102,241,.35);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-[#0b1220] via-[#0f1b3d] to-[#05080f] text-white flex flex-col items-center overflow-x-hidden">
+
+  <!-- NAV -->
+  <nav class="w-full max-w-7xl flex justify-between px-6 py-5 text-lg text-white/80">
+    <div class="flex items-center gap-3 font-semibold text-xl">
+      <div class="w-7 h-7 rounded-full bg-indigo-500"></div>
+      Zana
+    </div>
+    <div class="flex gap-8">
+      <a href="#updates" class="hover:text-white">Updates</a>
+      <a href="#faq" class="hover:text-white">FAQ</a>
+      <a href="#contact" class="hover:text-white">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="text-center mt-24 px-6 reveal">
+    <span class="text-sm text-white/60">Zana · Coming Soon</span>
+
+    <h1 class="text-4xl md:text-6xl font-bold mt-6 max-w-3xl mx-auto">
+      Smarter SEO for<br><span class="text-indigo-400">modern websites</span>
+    </h1>
+
+    <p class="text-white/60 mt-6 max-w-xl mx-auto">
+      Zana helps your website rank higher with clean optimization,
+      fast performance, and powerful search insights.
+    </p>
+
+    <!-- WAITLIST -->
+    <div class="card mt-10 p-4 max-w-md mx-auto">
+      <div class="flex gap-3">
+        <input
+          id="emailInput"
+          type="email"
+          placeholder="Your email"
+          class="flex-1 bg-transparent border border-white/10 rounded px-3 py-2"
+        />
+        <button
+          onclick="joinWaitlist()"
+          class="btn bg-indigo-600 px-4 py-2 rounded text-sm font-medium"
+        >
+          Join
+        </button>
+      </div>
+      <p id="successMsg" class="text-xs text-green-400 mt-2 hidden">
+        You're on the waitlist ✔
+      </p>
+    </div>
+  </section>
+
+  <!-- UPDATES -->
+  <section id="updates" class="max-w-5xl w-full mt-32 px-6 reveal">
+    <h2 class="text-3xl font-bold mb-8">Latest Updates</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-6">🚀 <strong>Public beta</strong><br><span class="text-white/60">Launching soon</span></div>
+      <div class="card p-6">📊 <strong>SEO Dashboard</strong><br><span class="text-white/60">Real-time insights</span></div>
+      <div class="card p-6">⚡ <strong>Performance</strong><br><span class="text-white/60">Stability testing</span></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="max-w-5xl w-full mt-32 px-6 reveal">
+    <h2 class="text-3xl font-bold mb-8">FAQ</h2>
+    <div class="space-y-4">
+      <div class="card p-6">
+        <strong>What is Zana?</strong>
+        <p class="text-white/60 mt-2">A modern SEO platform built for speed and clarity.</p>
+      </div>
+      <div class="card p-6">
+        <strong>Who is it for?</strong>
+        <p class="text-white/60 mt-2">Developers, creators, and startups.</p>
+      </div>
+      <div class="card p-6">
+        <strong>When does it launch?</strong>
+        <p class="text-white/60 mt-2">Soon — join the waitlist to stay updated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="max-w-5xl w-full mt-32 mb-24 px-6 reveal text-center">
+    <h2 class="text-3xl font-bold mb-6">Contact</h2>
+    <p class="text-white/60 mb-8">Reach out directly — I’d love to hear from you.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-8 text-lg">
+      <a href="https://x.com/guranshcodes" target="_blank" class="hover:text-white">X · @guranshcodes</a>
+      <a href="mailto:guranshcodes@outlook.com" class="hover:text-white">guranshcodes@outlook.com</a>
+    </div>
+  </section>
+
+  <footer class="text-xs text-white/40 py-6">© Zana</footer>
+
+  <!-- JS -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add("active"));
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    // Waitlist storage
+    function joinWaitlist() {
+      const input = document.getElementById("emailInput");
+      const email = input.value.trim();
+      if (!email) return;
+
+      const list = JSON.parse(localStorage.getItem("zana_waitlist") || "[]");
+      if (!list.includes(email)) list.push(email);
+      localStorage.setItem("zana_waitlist", JSON.stringify(list));
+
+      input.value = "";
+      document.getElementById("successMsg").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
