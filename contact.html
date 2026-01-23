@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zana · Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body::before {
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(600px 300px at 50% 15%, rgba(99,102,241,.18), transparent 60%);
+      z-index:-1;
+    }
+    .glass {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-[#05080f] text-white flex flex-col items-center">
+
+<nav class="fixed top-6 w-[92%] max-w-5xl glass rounded-xl px-6 py-3 flex justify-between text-sm text-white/80">
+  <div class="flex items-center gap-2 font-semibold">
+    <div class="w-6 h-6 rounded-full bg-indigo-500"></div>
+    <a href="index.html">Zana</a>
+  </div>
+  <div class="flex gap-6">
+    <a href="updates.html">Updates</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html" class="text-white">Contact</a>
+  </div>
+</nav>
+
+<main class="mt-40 max-w-xl px-6 text-center">
+  <h1 class="text-4xl font-semibold mb-6">Contact</h1>
+  <p class="text-white/60 mb-10">
+    Questions, partnerships, or early access?
+  </p>
+
+  <div class="glass p-8 rounded-xl space-y-4">
+    <a href="https://x.com/guranshcodes" target="_blank" class="block hover:text-white">
+      X · @guranshcodes
+    </a>
+    <a href="mailto:guranshcodes@outlook.com" class="block hover:text-white">
+      guranshcodes@outlook.com
+    </a>
+  </div>
+</main>
+
+<footer class="mt-24 mb-10 text-xs text-white/40">© Zana</footer>
+</body>
+</html>
